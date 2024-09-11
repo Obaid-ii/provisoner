@@ -14,7 +14,8 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 # Define environment variables
 ENV IOT_HUB_HOST=iothubdevuae.azure-devices.net
-ENV ENV DATABASE_URL=postgresql://postgres:1234@10.3.16.5:5432/postgres
+ENV DATABASE_URL=postgresql://postgres:1234@10.3.16.5:5432/postgres
+
 
 # Expose port 8000 (FastAPI default port)
 EXPOSE 8000
