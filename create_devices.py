@@ -1,13 +1,13 @@
 import logging
 import asyncio
-from db_util import get_postgres_connection
+from db_util import start_postgres_connection
 from iothub_util import registry_manager
 
 logging.basicConfig(level=logging.INFO)
 
 async def create_device(device_id: str):
     """Asynchronously creates or retrieves a device from PostgreSQL or IoT Hub."""
-    conn = get_postgres_connection()
+    conn = start_postgres_connection()
     cursor = conn.cursor()
 
     try:

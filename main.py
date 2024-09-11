@@ -21,7 +21,7 @@ async def startup_event():
 @app.on_event("shutdown")
 def shutdown_event():
     logging.info("Application shutdown: Closing database connection.")
-    conn = get_postgres_connection()
+    conn = start_postgres_connection()
     close_postgres_connection(conn)
 
 @app.post("/receive-data")
