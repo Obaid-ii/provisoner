@@ -21,4 +21,4 @@ ENV DATABASE_URL=postgresql://postgres:1234@10.3.16.5:5432/postgres
 EXPOSE 8000
 
 # Command to run FastAPI server
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"]
