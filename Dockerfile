@@ -3,22 +3,26 @@ FROM python:3.12-slim
 
 # Set the working directory in the container
 WORKDIR /app
-# Install PostgreSQL dependencies and build tools
+
+# Install PostgreSQL dependencies and build tools in a single layer to reduce image size
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     build-essential
+
+# Upgrade pip and setuptools to avoid compatibility issues before installing requirements
+RUN pip install --upgrade pip setuptools wheel
+
 # Copy the current directory contents into the container
 COPY . /app
 
-# Install dependencies
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
+
 # Define environment variables
 ENV IOT_HUB_HOST=iothubdevuae.azure-devices.net
-ENV DATABASE_URL=postgresql://postgres:1234@10.3.16.5:5432/postgres
-
 
 # Expose port 8000 (FastAPI default port)
 EXPOSE 8000
 
 # Command to run FastAPI server
-CMD ["uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
